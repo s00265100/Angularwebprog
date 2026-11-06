@@ -1,9 +1,23 @@
-import { Component } from '@angular/core';
+import { Component,OnInit,inject } from '@angular/core';
+import { CarService } from '../../services/car.service';
+import { Car } from '../../models/car.model';
+import { Observable } from 'rxjs';
+import { AsyncPipe } from '@angular/common';
 
 @Component({
   selector: 'app-car-list',
-  imports: [],
+  imports: [AsyncPipe],
   templateUrl: './car-list.html',
   styleUrl: './car-list.css',
 })
-export class CarList {}
+export class CarList implements OnInit {
+  //inject(CarService) give the component access to our service.
+  private carService = inject(CarService);
+//cars$ store the Observable containing the car list.
+  cars$!: Observable<Car[]>;
+//ngOnInit()  runs when Angular initialises the component
+  ngOnInit(): void {
+    //getCars()  gett the Observable from the service.
+    this.cars$ = this.carService.getCars();
+  }
+}
