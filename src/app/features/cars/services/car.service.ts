@@ -19,4 +19,18 @@ export class CarService {
     }
   });
 }
+getCarById(id: string): Observable<Car> {
+  return this.http.get<Car>(`${this.apiUrl}/${id}`, {
+    headers: {
+      'x-api-key': 'test-key'
+    }
+  });
+}
+addCar(car: Partial<Car>): Observable<Car> {
+  return this.http.post<Car>(this.apiUrl, car, {
+    headers: {
+      'x-api-key': 'test-key'
+    }
+  });
+}
 }
