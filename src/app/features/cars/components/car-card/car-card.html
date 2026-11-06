@@ -1,8 +1,19 @@
-<div class="card">
-    <a [routerLink]="['/cars', car()._id]">View Profile</a>
-  <h3>{{ car().make }} {{ car().model }}</h3>
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      {{ car().make }} {{ car().model }}
+    </mat-card-title>
+  </mat-card-header>
 
-  @if (car().year) {
-    <p>Year: {{ car().year }}</p>
-  }
-</div>
+  <mat-card-content>
+    @if (car().year) {
+      <p>Year: {{ car().year }}</p>
+    }
+  </mat-card-content>
+
+  <mat-card-actions>
+    <a mat-button [routerLink]="['/cars', car()._id]">
+      View Profile
+    </a>
+  </mat-card-actions>
+</mat-card>

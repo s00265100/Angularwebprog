@@ -4,6 +4,7 @@ npm install -g @angular/cli
 Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 npm audit fix
 cd angularWS
+ng add @angular/material
 
 
 # AngularWS
