@@ -12,20 +12,10 @@ export class CarService {
   private apiUrl = 'http://localhost:3000/api/v1/cars';
 
   getCars(): Observable<Car[]> {
-    return this.http.get<Car[]>(this.apiUrl, {
-      headers: { 'x-api-key': 'test-key' }
-    });
-  }
-
-  getCarById(id: string): Observable<Car> {
-    return this.http.get<Car>(`${this.apiUrl}/${id}`, {
-      headers: { 'x-api-key': 'test-key' }
-    });
-  }
-
-  addCar(car: CreateCarDto): Observable<Car> {
-    return this.http.post<Car>(this.apiUrl, car, {
-      headers: { 'x-api-key': 'test-key' }
-    });
-  }
+  return this.http.get<Car[]>(this.apiUrl, {
+    headers: {
+      'x-api-key': 'test-key'
+    }
+  });
+}
 }
