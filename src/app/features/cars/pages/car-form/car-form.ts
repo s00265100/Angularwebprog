@@ -1,39 +1,50 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject,signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router,RouterLink } from '@angular/router';
 import { CarService } from '../../services/car.service';
+import {Car, CreateCarDto } from '../../models/car.model';
 
 @Component({
   selector: 'app-car-form',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,RouterLink],
   templateUrl: './car-form.html',
   styleUrl: './car-form.css',
 })
 export class CarForm {
-
+  saving = signal(false);
+  saveError = signal<string | null>(null);
   private fb = inject(FormBuilder);
   private carService = inject(CarService);
   private router = inject(Router);
 
-  carForm = this.fb.group({
+  carForm = this.fb.nonNullable.group({
     make: ['', Validators.required],
     model: ['', Validators.required],
-    year: [null as number | null]
+    year: this.fb.control<number | null>(null)
   });
 
   onSubmit(): void {
-    if (this.carForm.invalid) return;
+  if (this.carForm.invalid) return;
 
-    const newCar = {
-  make: this.carForm.value.make ?? '',
-  model: this.carForm.value.model ?? '',
-  ...(this.carForm.value.year != null
-    ? { year: this.carForm.value.year }
-    : {})
-};
+  const { make, model, year } = this.carForm.getRawValue();
+  const newCar: CreateCarDto = {
+    make,
+    model,
+    year: year ?? undefined
+  };
 
-    this.carService.addCar(newCar).subscribe(() => {
+  this.saving.set(true);
+  this.saveError.set(null);
+
+  this.carService.addCar(newCar).subscribe({
+    next: (response) => {
+      console.log('Car added successfully:', response);
       this.router.navigate(['/cars']);
-    });
-  }
+    },
+    error: (err: Error) => {
+      this.saveError.set(err.message);
+      this.saving.set(false);
+    }
+  });
+}
 }
