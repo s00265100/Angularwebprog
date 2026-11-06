@@ -1,0 +1,11 @@
+<h2>Car List</h2>
+<!--async  subscribes to the Observable and receives the cars.-->
+@if (cars$ | async; as cars) {
+  <ul>
+    @for (car of cars; track car._id) {
+      <li>{{ car.make }} {{ car.model }}</li>
+    }
+  </ul>
+} @else {
+  <p>Loading cars...</p>
+}

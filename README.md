@@ -1,6 +1,14 @@
-# AngularWebprog
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.2.5.
+npm install -g @angular/cli
+%USERPROFILE%\Appdata\Roaming\npm
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+npm audit fix
+cd angularWS
+
+
+# AngularWS
+
+This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.3.
 
 ## Development server
 

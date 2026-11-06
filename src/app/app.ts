@@ -1,12 +1,13 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { CarList } from './features/cars/pages/car-list/car-list';
 
 @Component({
-  imports: [RouterOutlet],
   selector: 'app-root',
-  styleUrl: './app.css',
+  imports: [RouterOutlet, CarList],
   templateUrl: './app.html',
+  styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('angularWebprog');
+  protected readonly title = signal('angularWS');
 }
