@@ -16,7 +16,15 @@
     <input type="number" formControlName="year">
   </div>
 
-  <button type="submit" [disabled]="carForm.invalid">
-    Add Car
+  @if (saveError(); as message) {
+  <p role="alert">{{ message }}</p>
+}
+
+<div class="button-group">
+  <button type="submit" [disabled]="saving()">
+    {{ saving() ? 'Saving...' : 'Save car' }}
   </button>
+
+  <a routerLink="/cars">Cancel</a>
+</div>
 </form>
