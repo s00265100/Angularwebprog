@@ -1,0 +1,8 @@
+<h2>Car Details</h2>
+
+@if (car(); as selectedCar) {
+  <h3>{{ selectedCar.make }} {{ selectedCar.model }}</h3>
+  <p>Year: {{ selectedCar.year }}</p>
+} @else {
+  <p>Loading car details...</p>
+}
