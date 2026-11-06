@@ -1,6 +1,6 @@
 <h2>Add New Car</h2>
 
-<form [formGroup]="carForm">
+<form [formGroup]="carForm" (ngSubmit)="onSubmit()">
   <div>
     <label>Make:</label>
     <input type="text" formControlName="make">
