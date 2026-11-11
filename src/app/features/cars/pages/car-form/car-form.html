@@ -1,30 +1,56 @@
 <h2>Add New Car</h2>
 
 <form [formGroup]="carForm" (ngSubmit)="onSubmit()">
-  <div>
-    <label>Make:</label>
-    <input type="text" formControlName="make">
-  </div>
 
-  <div>
-    <label>Model:</label>
-    <input type="text" formControlName="model">
-  </div>
+  <mat-form-field appearance="outline">
+  <mat-label>Make</mat-label>
+  <input matInput type="text" formControlName="make">
 
-  <div>
-    <label>Year:</label>
-    <input type="number" formControlName="year">
-  </div>
+  @if (carForm.controls.make.hasError('required')) {
+    <mat-error>Make is required</mat-error>
+  } @else if (carForm.controls.make.hasError('minlength')) {
+    <mat-error>Make must be at least 2 characters</mat-error>
+  } @else if (carForm.controls.make.hasError('maxlength')) {
+    <mat-error>Make must be 30 characters or fewer</mat-error>
+  }
+</mat-form-field>
 
+ <mat-form-field appearance="outline">
+  <mat-label>Model</mat-label>
+  <input matInput type="text" formControlName="model">
+
+  @if (carForm.controls.model.hasError('required')) {
+    <mat-error>Model is required</mat-error>
+  } @else if (carForm.controls.model.hasError('maxlength')) {
+    <mat-error>Model must be 30 characters or fewer</mat-error>
+  }
+</mat-form-field>
+
+<mat-form-field appearance="outline">
+  <mat-label>Year</mat-label>
+  <input matInput type="number" formControlName="year">
+  <mat-hint>Optional</mat-hint>
+
+  @if (carForm.controls.year.hasError('min')) {
+    <mat-error>Year must be 1950 or later</mat-error>
+  } @else if (carForm.controls.year.hasError('max')) {
+    <mat-error>Year cannot be later than {{ currentYear + 1 }}</mat-error>
+  }
+</mat-form-field>
   @if (saveError(); as message) {
-  <p role="alert">{{ message }}</p>
-}
+    <p role="alert">{{ message }}</p>
+  }
 
-<div class="button-group">
-  <button type="submit" [disabled]="saving()">
-    {{ saving() ? 'Saving...' : 'Save car' }}
-  </button>
+  <div class="button-group">
+    <button mat-raised-button type="submit"
+            [disabled]="saving() || carForm.invalid">
+      {{ saving() ? 'Saving...' : 'Save car' }}
+    </button>
 
-  <a routerLink="/cars">Cancel</a>
-</div>
+    <a mat-button routerLink="/cars">Cancel</a>
+  </div>
+  @if (saving()) {
+    <mat-progress-bar mode="buffer"/>
+  }
+
 </form>

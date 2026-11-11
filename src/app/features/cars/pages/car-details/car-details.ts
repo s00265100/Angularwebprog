@@ -4,10 +4,10 @@ import { switchMap } from 'rxjs';
 import { CarService } from '../../services/car.service';
 import { Car } from '../../models/car.model';
 import { LoadState, withLoadState } from '../../../../shared/load-state';
-
+import { MatCardModule } from '@angular/material/card';
 @Component({
   selector: 'app-car-details',
-  imports: [],
+  imports: [MatCardModule],
   templateUrl: './car-details.html',
   styleUrl: './car-details.css'
 })

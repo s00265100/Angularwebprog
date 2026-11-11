@@ -11,6 +11,15 @@
 }
 
 @if (s.status === 'loaded') {
-  <h3>{{ s.data.make }} {{ s.data.model }}</h3>
-  <p>Year: {{ s.data.year }}</p>
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>
+        {{ s.data.make }} {{ s.data.model }}
+      </mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <p>Year: {{ s.data.year }}</p>
+    </mat-card-content>
+  </mat-card>
 }
