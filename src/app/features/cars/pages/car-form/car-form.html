@@ -49,5 +49,8 @@
 
     <a mat-button routerLink="/cars">Cancel</a>
   </div>
+  @if (saving()) {
+    <mat-progress-bar mode="buffer"/>
+  }
 
 </form>
