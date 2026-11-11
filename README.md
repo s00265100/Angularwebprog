@@ -5,7 +5,9 @@ Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
 npm audit fix
 cd angularWS
 ng add @angular/material
+git config --global user.name "s00265100"
 
+git config --global user.email "s00265100@atu.ie"
 
 # AngularWS
 
