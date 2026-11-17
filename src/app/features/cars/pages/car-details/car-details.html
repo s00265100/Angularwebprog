@@ -1,3 +1,4 @@
+
 <h2>Car Details</h2>
 
 @let s = state();
@@ -21,5 +22,19 @@
     <mat-card-content>
       <p>Year: {{ s.data.year }}</p>
     </mat-card-content>
+
+    <mat-card-actions>
+      <a matButton="filled" [routerLink]="['/cars', s.data._id, 'edit']">
+        Edit
+      </a>
+      <button matButton="outlined"
+        (click)="deleteCar(s.data)"
+        [disabled]="deleting()">
+  {{ deleting() ? 'Deleting...' : 'Delete' }}
+</button>
+@if (deleteError()) {
+  <p class="error">{{ deleteError() }}</p>
+}
+    </mat-card-actions>
   </mat-card>
 }
