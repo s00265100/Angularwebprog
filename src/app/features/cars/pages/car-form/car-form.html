@@ -1,42 +1,52 @@
+
 <h2>Add New Car</h2>
 
 <form [formGroup]="carForm" (ngSubmit)="onSubmit()">
 
   <mat-form-field appearance="outline">
-  <mat-label>Make</mat-label>
-  <input matInput type="text" formControlName="make">
+    <mat-label>Make</mat-label>
+    <input matInput type="text" formControlName="make">
 
-  @if (carForm.controls.make.hasError('required')) {
-    <mat-error>Make is required</mat-error>
-  } @else if (carForm.controls.make.hasError('minlength')) {
-    <mat-error>Make must be at least 2 characters</mat-error>
-  } @else if (carForm.controls.make.hasError('maxlength')) {
-    <mat-error>Make must be 30 characters or fewer</mat-error>
-  }
-</mat-form-field>
+    @if (carForm.controls.make.hasError('required')) {
+      <mat-error>Make is required</mat-error>
+    } @else if (carForm.controls.make.hasError('minlength')) {
+      <mat-error>Make must be at least 2 characters</mat-error>
+    } @else if (carForm.controls.make.hasError('maxlength')) {
+      <mat-error>Make must be 30 characters or fewer</mat-error>
+    }
 
- <mat-form-field appearance="outline">
-  <mat-label>Model</mat-label>
-  <input matInput type="text" formControlName="model">
+    @if (carForm.controls.make.hasError('blank')) {
+      <mat-error>Make cannot be only spaces</mat-error>
+    }
+  </mat-form-field>
 
-  @if (carForm.controls.model.hasError('required')) {
-    <mat-error>Model is required</mat-error>
-  } @else if (carForm.controls.model.hasError('maxlength')) {
-    <mat-error>Model must be 30 characters or fewer</mat-error>
-  }
-</mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Model</mat-label>
+    <input matInput type="text" formControlName="model">
 
-<mat-form-field appearance="outline">
-  <mat-label>Year</mat-label>
-  <input matInput type="number" formControlName="year">
-  <mat-hint>Optional</mat-hint>
+    @if (carForm.controls.model.hasError('required')) {
+      <mat-error>Model is required</mat-error>
+    } @else if (carForm.controls.model.hasError('maxlength')) {
+      <mat-error>Model must be 30 characters or fewer</mat-error>
+    }
 
-  @if (carForm.controls.year.hasError('min')) {
-    <mat-error>Year must be 1950 or later</mat-error>
-  } @else if (carForm.controls.year.hasError('max')) {
-    <mat-error>Year cannot be later than {{ currentYear + 1 }}</mat-error>
-  }
-</mat-form-field>
+    @if (carForm.controls.model.hasError('blank')) {
+      <mat-error>Model cannot be only spaces</mat-error>
+    }
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Year</mat-label>
+    <input matInput type="number" formControlName="year">
+    <mat-hint>Optional</mat-hint>
+
+    @if (carForm.controls.year.hasError('min')) {
+      <mat-error>Year must be 1950 or later</mat-error>
+    } @else if (carForm.controls.year.hasError('max')) {
+      <mat-error>Year cannot be later than {{ currentYear + 1 }}</mat-error>
+    }
+  </mat-form-field>
+
   @if (saveError(); as message) {
     <p role="alert">{{ message }}</p>
   }
@@ -49,8 +59,10 @@
 
     <a mat-button routerLink="/cars">Cancel</a>
   </div>
+
   @if (saving()) {
     <mat-progress-bar mode="buffer"/>
   }
 
 </form>
+
